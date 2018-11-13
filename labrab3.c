@@ -1,78 +1,78 @@
 #include<stdio.h>
 #include "math.h"
-#define n 5
-void sort(int a[n][n]);
-void main(void)
+#define N 5
+void sort(int a[][N])
 {
-    int i,j;
-    static int a[n][n];
-
-    for (i = 0; i < n; i++)
+    int line, k,  column, swap;
+    for(column = 0; column < N; column++)
     {
-        for (j = 0; j < n; j++)
+        for(k = N-1; k>=0; k--)
         {
-            printf("a[%d][%d] =", i+1, j+1);
-            scanf("%d", &a[i][j]);
-        }
-    }
-    printf("old array\n");
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-            printf ("%5d", a[i][j]);
-        printf("\n");
-    }
-    sort(a);
-    float result = 1;
-    float sred = 0;
-    float sum = 0;
-
-
-    printf("\nnew array\n");
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            printf ("%5d", a[i][j]);
-        }
-        printf("\n");
-    }
-    for(i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            if ((i + j) > 4) {
-                result *= a[i][j];
-
-
-            }
-        }
-        sum += result;
-        printf("Multpl in [%d] line: %f\n", i, result);
-
-
-        result = 1;
-    }
-    sum--;
-    sred = sum / 10;
-    printf("\nseredne aref =  %f\n", sred );
-
-
-}
-void sort(int a[][n])
-{
-    int i, k, j, c;
-    for(j = 0; j < n; j++)
-    {
-        for(k = n-1; k>=0; k--)
-        {
-            for(i = 0; i < k; i++)
+            for(line = 0; line < k; line++)
             {
-                if(a[i][j] < a[i+1][j])
+                if(a[line][column] < a[line+1][column])
                 {
-                    c = a[i][j];
-                    a[i][j] = a[i+1][j];
-                    a[i+1][j] =c;
+                    swap = a[line][column];
+                    a[line][column] = a[line+1][column];
+                    a[line+1][column] =swap;
                 }
             }
         }
     }
 }
+void main()
+{
+    int line,column;
+    static int a[N][N];
+
+    for (line = 0; line < N; line++)
+    {
+        for (column = 0; column < N; column++)
+        {
+            printf("a[%d][%d] =", line+1, column+1);
+            scanf("%d", &a[line][column]);
+        }
+    }
+    printf("old array\n");
+    for (line = 0; line < N; line++)
+    {
+        for (column = 0; column < N; column++)
+            printf ("%5d", a[line][column]);
+        printf("\n");
+    }
+    sort(a);
+    float result = 1;
+    float avarage = 0;
+    float sum = 0;
+
+
+    printf("\nnew array\n");
+    for (line = 0; line < N; line++)
+    {
+        for (column = 0; column < N; column++)
+        {
+            printf ("%5d", a[line][column]);
+        }
+        printf("\n");
+    }
+    for(line = 0; line < N; line++) {
+        for (column = 0; column < N; column++) {
+            if ((line + column) > 4) {
+                result *= a[line][column];
+
+
+            }
+        }
+        sum += result;
+        if(line>=1) {
+            printf("Multpl in [%d] line: %f\n", line + 1, result);
+        }
+
+        result = 1;
+    }
+    sum--;
+    avarage = sum / 10;
+    printf("\nseredne aref =  %f\n", avarage);
+}
+
+
